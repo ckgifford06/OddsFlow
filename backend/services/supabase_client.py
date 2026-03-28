@@ -1,10 +1,9 @@
 import os
 from supabase import create_client, Client
-from dotenv import load_dotenv
 from datetime import datetime
 
-load_dotenv()
 
+API_KEY = os.getenv("ODDS_API_KEY")
 url = os.getenv("SUPABASE_URL")
 key = os.getenv("SUPABASE_KEY")
 

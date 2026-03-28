@@ -1,10 +1,7 @@
 import httpx
-import os
-from dotenv import load_dotenv
 from models.schemas import Game, BookOdds
 from datetime import datetime
-
-load_dotenv()
+import os
 
 API_KEY = os.getenv("ODDS_API_KEY")
 BASE_URL = "https://api.the-odds-api.com/v4"

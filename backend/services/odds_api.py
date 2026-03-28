@@ -26,8 +26,8 @@ async def fetch_odds(sport: str) -> list[Game]:
     params = {
         "apiKey": API_KEY,
         "regions": "us",
-        "markets": "h2h,spreads,totals",
-        "oddsFormat": "american"
+        "markets": "h2h",
+        "oddsFormat": "american",
     }
 
     async with httpx.AsyncClient() as client:

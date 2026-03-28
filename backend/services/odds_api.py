@@ -16,7 +16,6 @@ SPORT_KEYS = {
 
 BOOKS = ["draftkings", "fanduel", "betmgm", "caesars", "pointsbet"]
 
-
 async def fetch_odds(sport: str) -> list[Game]:
     sport_key = SPORT_KEYS.get(sport)
     if not sport_key:
@@ -40,24 +39,14 @@ async def fetch_odds(sport: str) -> list[Game]:
         book_odds = []
         for bookmaker in item.get("bookmakers", []):
             h2h = next((m for m in bookmaker["markets"] if m["key"] == "h2h"), None)
-            spreads = next((m for m in bookmaker["markets"] if m["key"] == "spreads"), None)
-            totals = next((m for m in bookmaker["markets"] if m["key"] == "totals"), None)
-
             if not h2h:
                 continue
-
             outcomes = {o["name"]: o["price"] for o in h2h["outcomes"]}
-            spread_val = spreads["outcomes"][0]["point"] if spreads else None
-            total_val = totals["outcomes"][0]["point"] if totals else None
-
             book_odds.append(BookOdds(
                 book=bookmaker["key"],
                 home_price=outcomes.get(item["home_team"], 0),
                 away_price=outcomes.get(item["away_team"], 0),
-                spread=spread_val,
-                total=total_val,
             ))
-
         games.append(Game(
             id=item["id"],
             sport=sport,
@@ -66,5 +55,4 @@ async def fetch_odds(sport: str) -> list[Game]:
             commence_time=datetime.fromisoformat(item["commence_time"].replace("Z", "+00:00")),
             odds=book_odds,
         ))
-
     return games

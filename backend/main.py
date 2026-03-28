@@ -8,9 +8,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
     "http://localhost:5173",
-    "https://odds-flow.vercel.app",
-    "https://*.vercel.app"
-    ],
+    "https://odds-flow.vercel.app"],
     allow_methods=["*"],
     allow_headers=["*"],
 )

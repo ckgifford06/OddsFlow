@@ -7,8 +7,6 @@ class BookOdds(BaseModel):
     book: str
     home_price: int
     away_price: int
-    spread: Optional[float] = None
-    total: Optional[float] = None
 
 
 class Game(BaseModel):
